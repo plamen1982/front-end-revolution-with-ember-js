@@ -2,6 +2,7 @@
 
 module.exports = function(environment) {
   let ENV = {
+    apiNamesapce: 'api/v1',
     modulePrefix: 'expenses-app',
     environment,
     rootURL: '/',
@@ -24,6 +25,7 @@ module.exports = function(environment) {
   };
 
   if (environment === 'development') {
+    ENV.serverURL = 'http://red-green-api.herokuapp.com/api/v1'
     // ENV.APP.LOG_RESOLVER = true;
     // ENV.APP.LOG_ACTIVE_GENERATION = true;
     // ENV.APP.LOG_TRANSITIONS = true;
@@ -46,6 +48,7 @@ module.exports = function(environment) {
   if (environment === 'production') {
     // here you can enable a production-specific feature
   }
+  ENV.apiBaseURL = ENV.serverURL + '/' + ENV.apiNamesapce;
 
   return ENV;
 };
