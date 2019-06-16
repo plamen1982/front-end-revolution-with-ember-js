@@ -1,16 +1,32 @@
 import Route from '@ember/routing/route';
+import { inject as service } from '@ember/service';
+import ENV from 'expenses-app/config/environment';
 
 export default Route.extend({
-    
-    beforeModel() {
-        console.log('signup - beforeModel was called');
-    },
+    ajax: service(),
+    actions: {
+        signup(email, password) {
+            const userParams = {
+                data: {
+                    attributes: {
+                        email,
+                        password,
+                        currency: 'USD'
+                }
+            }
+        };
 
-    model() {
-        console.log('signup - model was called');
-    },
+            this.controller.set('isSingingUp', true);
 
-    afterModel() {
-        console.log('signup - afterModel was called');
+            const url = `${ENV.apiBaseURL}/users`;
+            const request = this.get('ajax').request(url, {
+                method: 'POST',
+                data: userParams,
+            });
+            request
+            .then(() => { this.transitionTo('login') })
+            .catch((e) => { this.controller.set('signupError', 'Signup error.') })
+            .finally(() => { this.controller.set('isSigningUp', false) })
+        }
     }
 });
