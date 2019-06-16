@@ -2,7 +2,7 @@
 
 module.exports = function(environment) {
   let ENV = {
-    apiNamesapce: 'api/v1',
+    apiNamespace: 'api/v1',
     modulePrefix: 'expenses-app',
     environment,
     rootURL: '/',
@@ -48,7 +48,7 @@ module.exports = function(environment) {
   if (environment === 'production') {
     // here you can enable a production-specific feature
   }
-  ENV.apiBaseURL = `${ENV.serverURL}/${ENV.apiNamesapce}`;
+  ENV.apiBaseURL = `${ENV.serverURL}/${ENV.apiNamespace}`;
   
   ENV['ember-simple-auth'] = {
     routeAfterAuthentication: 'dashboard',
