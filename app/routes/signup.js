@@ -4,6 +4,7 @@ import ENV from 'expenses-app/config/environment';
 
 export default Route.extend({
     ajax: service(),
+    session: service(),
     actions: {
         signup(email, password) {
             const userParams = {
@@ -24,9 +25,9 @@ export default Route.extend({
                 data: userParams,
             });
             request
-            .then(() => { this.transitionTo('login') })
-            .catch((e) => { this.controller.set('signupError', 'Signup error.') })
-            .finally(() => { this.controller.set('isSigningUp', false) })
+                .then(this.get('session').authenticate('authenticator:oauth2', email, password))
+                .catch(() => { this.controller.set('signupError', 'Signup error.') })
+                .finally(() => { this.controller.set('isSigningUp', false) })
         }
     }
 });
