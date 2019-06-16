@@ -49,6 +49,11 @@ module.exports = function(environment) {
     // here you can enable a production-specific feature
   }
   ENV.apiBaseURL = `${ENV.serverURL}/${ENV.apiNamesapce}`;
+  
+  ENV['ember-simple-auth'] = {
+    routeAfterAuthentication: 'dashboard',
+    routeIfAlreadyAuthenticated: 'dashboard'
+  };
 
   return ENV;
 };
