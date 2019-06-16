@@ -9,7 +9,7 @@ const Router = EmberRouter.extend({
 Router.map(function() {
   this.route('login');
   this.route('signup');
-  this.route('dashboard', function() {
+  this.route('dashboard', { path: '/' }, function() {
     this.route('overview');
     this.route('incomes', function() {});
     this.route('expenses', function() {});
